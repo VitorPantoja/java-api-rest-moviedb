@@ -1,0 +1,24 @@
+server:
+  port: 8080
+spring:
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher
+  application:
+    name: ${MOVIE_CATALOG:movie-catalog}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/movie-db?serverTimezone=UTC&useSSL=false
+    username: postgres
+    password: 123
+
+
+
+
