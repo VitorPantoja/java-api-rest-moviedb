@@ -33,12 +33,11 @@ public class Movie {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @ManyToOne
+    @OneToOne
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @JoinColumn(name = "movie_details")
     private MovieDetails movieDetails;
 
-    @OneToMany(mappedBy = "movie",orphanRemoval = true, cascade = CascadeType.ALL)
-    private Set<ProfessionalAssignment> movieSet;
+//    @OneToMany(mappedBy = "movie",orphanRemoval = true, cascade = CascadeType.ALL)
+//    private Set<ProfessionalAssignment> movieSet;
 
 }

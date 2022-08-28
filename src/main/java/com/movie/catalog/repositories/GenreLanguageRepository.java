@@ -1,9 +1,9 @@
 package com.movie.catalog.repositories;
 
-import com.movie.catalog.models.Movie;
+import com.movie.catalog.models.GenreLanguage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MovieRepository extends JpaRepository <Movie, Long> {
+public interface GenreLanguageRepository extends JpaRepository <GenreLanguage, Long> {
 }

@@ -1,9 +1,6 @@
 package com.movie.catalog.service.dtos;
 
-import com.movie.catalog.models.Genre;
-import com.movie.catalog.models.Language;
-import com.movie.catalog.models.Movie;
-import com.movie.catalog.models.MovieDetails;
+import com.movie.catalog.models.*;
 import lombok.*;
 
 import java.util.HashSet;
@@ -24,10 +21,19 @@ public class CreateUpdateMovieDetailsDTO {
     List<CreateUpdateGenreLanguageDTO> genreDTO;
 
     public MovieDetails toEntity(){
-        return MovieDetails.builder()
+         var movieDetails= MovieDetails.builder()
                 .setId(id)
-                .setLanguages(genreDTO.stream().map(CreateUpdateGenreLanguageDTO::toEntity).collect(Collectors.toSet()))
                 .build();
+        if (nonNull(genreDTO)) {
+            movieDetails.setLanguages(genreDTO.stream().map(l -> GenreLanguage.builder()
+                    .setId(l.getId())
+                    .setGenre(Genre.builder().setId(l.getGenreId()).build())
+                    .setLanguage(Language.builder().setId(l.getLanguageId()).build())
+                    .setMovieDetails(movieDetails)
+                    .build()).collect(Collectors.toSet()));
+        }
+
+        return movieDetails;
     }
 
 //    public static CreateUpdateMovieDetailsDTO fromEntity(MovieDetails entity){

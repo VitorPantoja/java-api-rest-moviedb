@@ -22,10 +22,10 @@ public class ProfessionalAssignment {
     @Enumerated(EnumType.STRING)
     private MovieSetEnum function;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_id")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Movie movie;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "movie_id")
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    private Movie movie;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

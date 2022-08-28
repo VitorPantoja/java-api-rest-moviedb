@@ -32,7 +32,7 @@ public class GenreLanguage {
     private Genre genre;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "movie_details_id")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private MovieDetails movieDetails;
 

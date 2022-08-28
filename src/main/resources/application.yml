@@ -17,7 +17,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/movie-db?serverTimezone=UTC&useSSL=false
     username: postgres
-    password: 123
+    password: 1234
 
 
 
