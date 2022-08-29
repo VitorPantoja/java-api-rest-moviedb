@@ -5,8 +5,7 @@ import com.movie.catalog.models.ProfessionalAssignment;
 import com.movie.catalog.models.enums.MovieSetEnum;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,6 +31,5 @@ public class CreateUpdateProfessionalAssignmentDTO {
                 .function(dto.getFunction())
                 .build();
     }
-    //ok
 
 }

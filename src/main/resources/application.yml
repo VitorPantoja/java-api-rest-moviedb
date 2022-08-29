@@ -15,7 +15,7 @@ spring:
         show_sql: true
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
   datasource:
-    url: jdbc:postgresql://localhost:5432/movie-db?serverTimezone=UTC&useSSL=false
+    url: jdbc:postgresql://localhost:5432/movie-db2?serverTimezone=UTC&useSSL=false
     username: postgres
     password: 1234
 

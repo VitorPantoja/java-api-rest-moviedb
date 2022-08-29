@@ -3,8 +3,7 @@ package com.movie.catalog.service.dtos;
 import com.movie.catalog.models.Professional;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

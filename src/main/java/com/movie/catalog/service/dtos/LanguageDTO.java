@@ -4,8 +4,7 @@ import com.movie.catalog.models.Language;
 import com.movie.catalog.models.enums.LanguageEnum;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

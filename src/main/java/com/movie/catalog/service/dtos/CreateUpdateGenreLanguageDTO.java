@@ -5,8 +5,7 @@ import com.movie.catalog.models.GenreLanguage;
 import com.movie.catalog.models.Language;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
