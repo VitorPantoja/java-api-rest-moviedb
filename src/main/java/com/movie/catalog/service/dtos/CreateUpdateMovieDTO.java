@@ -1,7 +1,10 @@
 package com.movie.catalog.service.dtos;
 
-import com.movie.catalog.models.*;
-import lombok.*;
+import com.movie.catalog.models.Movie;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;

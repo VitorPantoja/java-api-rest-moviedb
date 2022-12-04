@@ -25,6 +25,12 @@ public class Movie {
     @Column(columnDefinition = "TEXT")
     private String name;
 
+    @Column(columnDefinition = "TEXT")
+    private String synopsis;
+
+    @Column(columnDefinition = "TEXT")
+    private String releaseDateOf;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;

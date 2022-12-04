@@ -1,9 +1,6 @@
 server:
   port: 8080
 spring:
-#  mvc:
-#    pathmatch:
-#      matching-strategy: ant_path_matcher
   application:
     name: ${MOVIE_CATALOG:movie-catalog}
   jpa:
@@ -14,6 +11,8 @@ spring:
       hibernate:
         show_sql: true
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        enable_lazy_load_no_trans: true
+        order_inserts: true
   datasource:
     url: jdbc:postgresql://localhost:5432/movie-db2?serverTimezone=UTC&useSSL=false
     username: postgres
