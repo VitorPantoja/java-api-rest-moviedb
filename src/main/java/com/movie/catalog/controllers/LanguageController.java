@@ -23,7 +23,7 @@ public class LanguageController {
     private final LanguageService languageService;
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody @Valid LanguageDTO dto){
+    public ResponseEntity<?> save(@RequestBody LanguageDTO dto){
         return ResponseEntity.ok(languageService.save(dto));
     }
 }

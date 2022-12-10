@@ -39,6 +39,8 @@ public class MovieDTO {
                 .id(movie.getId())
                 .name(movie.getName())
                 .image(movie.getImage())
+                .synopsis(movie.getSynopsis())
+                .releaseDateOf(movie.getReleaseDateOf())
                 .professionalAssignments(new ArrayList<>(movie.getMovieSet()))
                 .genreLanguages(new ArrayList<>(movie.getLanguages()))
                 .build();

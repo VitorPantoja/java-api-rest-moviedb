@@ -13,7 +13,6 @@ public class LanguageDTO {
 
     Long id;
 
-    @ValidLanguage
     String name;
 
     LanguageEnum tag;
