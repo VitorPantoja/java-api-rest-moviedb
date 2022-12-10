@@ -2,26 +2,44 @@ package com.movie.catalog.controllers;
 
 import com.movie.catalog.service.MovieService;
 import com.movie.catalog.service.dtos.CreateUpdateMovieDTO;
+import com.movie.catalog.service.validations.ValidLanguage;
+import com.movie.catalog.service.validations.ValidMovie;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
+
+@Slf4j
+@Validated
 @RestController
 @RequestMapping(value = "/api/movies")
 @RequiredArgsConstructor
-@Slf4j
 public class MovieController {
 
     private final MovieService movieService;
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody CreateUpdateMovieDTO dto){
-        System.out.println("ok");
+    public ResponseEntity<?> save(@RequestBody @Valid CreateUpdateMovieDTO dto){
         return ResponseEntity.ok(movieService.save(dto));
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") @Min(0) Integer offset,
+                                    @RequestParam(defaultValue = "25") @Min(1) Integer limit,
+                                    @RequestParam(defaultValue = "id") String sort){
+        PageRequest pageRequest = PageRequest.of(offset, limit, Sort.by(sort).ascending());
+        return ResponseEntity.ok(movieService.findAll(pageRequest));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<?> findById(@PathVariable @ValidMovie Long id) {
+        return ResponseEntity.ok(movieService.findById(id));
     }
 
 }

@@ -2,6 +2,7 @@ package com.movie.catalog.service.dtos;
 
 import com.movie.catalog.models.Language;
 import com.movie.catalog.models.enums.LanguageEnum;
+import com.movie.catalog.service.validations.ValidLanguage;
 import lombok.*;
 
 @Data
@@ -12,6 +13,7 @@ public class LanguageDTO {
 
     Long id;
 
+    @ValidLanguage
     String name;
 
     LanguageEnum tag;

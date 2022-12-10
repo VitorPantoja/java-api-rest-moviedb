@@ -29,7 +29,10 @@ public class Movie {
     private String synopsis;
 
     @Column(columnDefinition = "TEXT")
-    private String releaseDateOf;
+    private LocalDateTime releaseDateOf;
+
+    @Column(columnDefinition = "TEXT")
+    private String image;
 
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)

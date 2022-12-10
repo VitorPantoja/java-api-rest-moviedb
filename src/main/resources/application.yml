@@ -1,22 +1,22 @@
 server:
-  port: 8080
+  port: ${PORT:8080}
 spring:
   application:
     name: ${MOVIE_CATALOG:movie-catalog}
   jpa:
-    show-sql: true
+    show-sql: ${MOVIE_DB_SHOW_SQL:true}
     hibernate:
-      ddl-auto: update
+      ddl-auto: ${MOVIE_DB_DDL_AUTO:update}
     properties:
       hibernate:
-        show_sql: true
-        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+        show_sql: ${MOVIE_DB_SHOW_SQL:true}
+        dialect: ${DATASOURCE_JPA_DIALECT:org.hibernate.dialect.PostgreSQL9Dialect}
         enable_lazy_load_no_trans: true
         order_inserts: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/movie-db2?serverTimezone=UTC&useSSL=false
-    username: postgres
-    password: 1234
+    url: jdbc:postgresql://${MOVIE_DB_HOST:localhost}:${MOVIE_DB_PORT:5432}/${MOVIE_DB_NAME:movie-db}?serverTimezone=UTC&useSSL=false
+    username: ${MOVIE_DB_USERNAME:postgres}
+    password: ${MOVIE_DB_PASSWORD:123}
 
 
 
