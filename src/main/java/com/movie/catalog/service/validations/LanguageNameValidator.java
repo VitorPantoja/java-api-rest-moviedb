@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 
 import static java.util.Objects.isNull;
 
-public class LanguageNameValidator implements ConstraintValidator<ValidLanguage, String> {
+public class LanguageNameValidator implements ConstraintValidator<ValidLanguageName, String> {
 
     @Autowired
     private LanguageRepository languageRepository;
