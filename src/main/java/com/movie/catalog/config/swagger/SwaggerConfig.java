@@ -10,8 +10,6 @@ public class SwaggerConfig {
 
     @Bean
     public OpenAPI springShopOpenAPI() {
-        return new OpenAPI()
-                .info(new Info().title("Movie Catalog API").description("Movie Catalog").version("0.0.1"));
-
+        return new OpenAPI().info(new Info().title("Movie Catalog API").description("Movie Catalog").version("0.0.1"));
     }
 }

@@ -1,8 +1,6 @@
 package com.movie.catalog.service.dtos;
 
-import com.movie.catalog.models.GenreLanguage;
 import com.movie.catalog.models.Movie;
-import com.movie.catalog.models.ProfessionalAssignment;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,8 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -31,9 +29,9 @@ public class MovieDTO {
 
     LocalDateTime releaseDateOf;
 
-    List<@Valid ProfessionalAssignment> professionalAssignments;
+    List<@Valid ProfessionalAssignmentDTO> professionalAssignments;
 
-    List<@Valid GenreLanguage> genreLanguages;
+    List<@Valid GenreLanguageDTO> genreLanguages;
 
     public static MovieDTO fromEntity(Movie movie) {
         var genres = movie.getLanguages().stream().map(genreLanguage -> genreLanguage.getGenre().getName()).reduce("",(partialString, genre) -> partialString + genre + ", ");
@@ -45,8 +43,10 @@ public class MovieDTO {
                 .synopsis(movie.getSynopsis())
                 .releaseDateOf(movie.getReleaseDateOf())
                 .genre(genres)
-                .professionalAssignments(new ArrayList<>(movie.getMovieSet()))
-                .genreLanguages(new ArrayList<>(movie.getLanguages()))
+                .professionalAssignments(movie.getMovieSet().stream()
+                        .map(ProfessionalAssignmentDTO::fromEntity).collect(Collectors.toList()))
+                .genreLanguages(movie.getLanguages().stream()
+                        .map(GenreLanguageDTO::fromEntity).collect(Collectors.toList()))
                 .build();
     }
 }
