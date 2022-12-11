@@ -7,9 +7,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Objects.nonNull;
 
 @Data
 @Builder
@@ -27,7 +30,7 @@ public class MovieDTO {
 
     String synopsis;
 
-    LocalDateTime releaseDateOf;
+    LocalDate releaseDateOf;
 
     List<@Valid ProfessionalAssignmentDTO> professionalAssignments;
 
@@ -41,7 +44,9 @@ public class MovieDTO {
                 .name(movie.getName())
                 .image(movie.getImage())
                 .synopsis(movie.getSynopsis())
-                .releaseDateOf(movie.getReleaseDateOf())
+                .releaseDateOf(nonNull(movie.getReleaseDateOf()) ?
+                        LocalDate.of(movie.getReleaseDateOf().getYear(), movie.getReleaseDateOf().getMonth().getValue(),
+                                movie.getReleaseDateOf().getDayOfMonth()) : null)
                 .genre(genres)
                 .professionalAssignments(movie.getMovieSet().stream()
                         .map(ProfessionalAssignmentDTO::fromEntity).collect(Collectors.toList()))
