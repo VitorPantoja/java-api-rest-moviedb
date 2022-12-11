@@ -1,12 +1,12 @@
 package com.movie.catalog.service.impls;
 
-import com.movie.catalog.models.GenreLanguage;
 import com.movie.catalog.models.Movie;
 import com.movie.catalog.repositories.MovieRepository;
 import com.movie.catalog.service.GenreLanguageService;
-import com.movie.catalog.service.GenreService;
 import com.movie.catalog.service.MovieService;
+import com.movie.catalog.service.dtos.CreateUpdateGenreLanguageDTO;
 import com.movie.catalog.service.dtos.CreateUpdateMovieDTO;
+import com.movie.catalog.service.dtos.CreateUpdateProfessionalAssignmentDTO;
 import com.movie.catalog.service.dtos.MovieDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -52,5 +51,32 @@ public class MovieServiceImpl implements MovieService {
                 .map(genreLanguage -> MovieDTO.fromEntity(genreLanguage.getMovie())).collect(Collectors.toList());
         final int end = (int) Math.min((pageRequest.getOffset() + pageRequest.getPageSize()), movies.size());
         return new PageImpl<>(movies.subList((int) pageRequest.getOffset(), end), pageRequest, movies.size());
+    }
+
+    @Override
+    @Transactional(rollbackFor = {Exception.class, Throwable.class})
+    public void delete(Long id) {
+        movieRepository.deleteById(id);
+    }
+
+    @Override
+    public Movie update(CreateUpdateMovieDTO movieDTO) {
+        var movieToUpdate = movieRepository.findById(movieDTO.getId()).orElse(null);
+        if (nonNull(movieToUpdate)) {
+            movieToUpdate.setImage(nonNull(movieDTO.getImage()) ? movieDTO.getImage() : movieToUpdate.getImage());
+            movieToUpdate.setName(nonNull(movieDTO.getName()) ? movieDTO.getName() : movieToUpdate.getName());
+            movieToUpdate.setSynopsis(nonNull(movieDTO.getSynopsis()) ? movieDTO.getSynopsis() : movieToUpdate.getSynopsis());
+            if (nonNull(movieDTO.getGenreLanguagesDTOS())) {
+                movieToUpdate.setLanguages(movieDTO.getGenreLanguagesDTOS().stream()
+                        .map(CreateUpdateGenreLanguageDTO::toEntity)
+                        .collect(Collectors.toSet()));
+            }
+            if (nonNull(movieDTO.getProfessionalAssignmentDTOS())) {
+                movieToUpdate.setMovieSet(movieDTO.getProfessionalAssignmentDTOS().stream()
+                        .map(CreateUpdateProfessionalAssignmentDTO::toEntity)
+                        .collect(Collectors.toSet()));
+            }
+        }
+        return movieToUpdate;
     }
 }

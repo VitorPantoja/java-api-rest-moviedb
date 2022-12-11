@@ -50,4 +50,15 @@ public class MovieController {
         PageRequest pageRequest = PageRequest.of(offset, limit, Sort.by(Sort.Direction.fromString(sort), "name", "name"));
         return ResponseEntity.ok(movieService.findByGenre(id, pageRequest));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable @ValidMovie Long id){
+        movieService.delete(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@RequestBody @Valid CreateUpdateMovieDTO dto){
+        return ResponseEntity.ok(movieService.update(dto));
+    }
 }

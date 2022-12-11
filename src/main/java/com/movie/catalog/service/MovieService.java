@@ -18,4 +18,8 @@ public interface MovieService {
 
     Page<MovieDTO> findByGenre(Long genreId, PageRequest pageRequest);
 
+    void delete(Long id);
+
+    Movie update(CreateUpdateMovieDTO movieDTO);
+
 }

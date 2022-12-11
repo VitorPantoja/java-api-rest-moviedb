@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class LanguageServiceImpl implements LanguageService {
@@ -18,5 +20,22 @@ public class LanguageServiceImpl implements LanguageService {
     @Transactional(rollbackFor = {Exception.class, Throwable.class})
     public Language save(LanguageDTO dto) {
         return languageRepository.save(dto.toEntity());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Language> findAll() {
+        return languageRepository.findAll();
+    }
+
+    @Override
+    public Language findById(Long id) {
+        return languageRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    @Transactional(rollbackFor = {Exception.class, Throwable.class})
+    public void delete(Long id) {
+        languageRepository.deleteById(id);
     }
 }

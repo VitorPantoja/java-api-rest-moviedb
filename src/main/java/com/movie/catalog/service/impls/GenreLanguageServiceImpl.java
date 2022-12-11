@@ -27,6 +27,4 @@ public class GenreLanguageServiceImpl implements GenreLanguageService {
     public List<GenreLanguage> findByGenre_Id(Long id) {
         return genreLanguageRepository.findByGenre_Id(id);
     }
-
-
 }
