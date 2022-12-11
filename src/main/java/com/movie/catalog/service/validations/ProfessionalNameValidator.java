@@ -15,7 +15,7 @@ public class ProfessionalNameValidator implements ConstraintValidator<ValidProfe
 
     @Override
     public boolean isValid(String name, ConstraintValidatorContext context) {
-        return isNull(name) || professionalRepository.findByName(name).isPresent();
+        return isNull(name) || professionalRepository.findByName(name).isEmpty();
     }
 
 }

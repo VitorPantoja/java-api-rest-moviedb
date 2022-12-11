@@ -15,6 +15,6 @@ public class LanguageNameValidator implements ConstraintValidator<ValidLanguage,
 
     @Override
     public boolean isValid(String name, ConstraintValidatorContext context) {
-        return isNull(name) || languageRepository.findByName(name).isPresent();
+        return isNull(name) || languageRepository.findByName(name).isEmpty();
     }
 }
