@@ -20,7 +20,6 @@ public class GenreLanguageController {
 
     @PostMapping
     public ResponseEntity<?> save(@RequestBody CreateUpdateGenreLanguageDTO dto){
-        System.out.println("ok");
         return ResponseEntity.ok(genreLanguageService.save(dto));
     }
 
