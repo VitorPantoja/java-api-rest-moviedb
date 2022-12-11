@@ -32,8 +32,8 @@ public class MovieController {
     @GetMapping
     public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") @Min(0) Integer offset,
                                     @RequestParam(defaultValue = "25") @Min(1) Integer limit,
-                                    @RequestParam(defaultValue = "id") String sort){
-        PageRequest pageRequest = PageRequest.of(offset, limit, Sort.by(sort).ascending());
+                                    @RequestParam(defaultValue = "ASC") String sort) {
+        PageRequest pageRequest = PageRequest.of(offset, limit, Sort.by(Sort.Direction.fromString(sort), "name", "name"));
         return ResponseEntity.ok(movieService.findAll(pageRequest));
     }
 
@@ -42,4 +42,12 @@ public class MovieController {
         return ResponseEntity.ok(movieService.findById(id));
     }
 
+    @GetMapping("/findByGenre/{id}")
+    public ResponseEntity<?> findByGenre(@PathVariable @ValidMovie Long id,
+                                         @RequestParam(defaultValue = "0") @Min(0) Integer offset,
+                                         @RequestParam(defaultValue = "25") @Min(1) Integer limit,
+                                         @RequestParam(defaultValue = "ASC") String sort) {
+        PageRequest pageRequest = PageRequest.of(offset, limit, Sort.by(Sort.Direction.fromString(sort), "name", "name"));
+        return ResponseEntity.ok(movieService.findByGenre(id, pageRequest));
+    }
 }

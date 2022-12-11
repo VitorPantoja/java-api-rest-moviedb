@@ -16,4 +16,6 @@ public interface MovieService {
 
     MovieDTO findById(Long id);
 
+    Page<MovieDTO> findByGenre(Long genreId, PageRequest pageRequest);
+
 }

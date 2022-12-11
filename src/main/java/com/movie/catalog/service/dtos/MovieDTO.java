@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,17 +31,20 @@ public class MovieDTO {
 
     LocalDateTime releaseDateOf;
 
-    List<ProfessionalAssignment> professionalAssignments;
+    List<@Valid ProfessionalAssignment> professionalAssignments;
 
-    List<GenreLanguage> genreLanguages;
+    List<@Valid GenreLanguage> genreLanguages;
 
     public static MovieDTO fromEntity(Movie movie) {
+        var genres = movie.getLanguages().stream().map(genreLanguage -> genreLanguage.getGenre().getName()).reduce("",(partialString, genre) -> partialString + genre + ", ");
+        genres = genres.substring(0, genres.length() - 2);
         return MovieDTO.builder()
                 .id(movie.getId())
                 .name(movie.getName())
                 .image(movie.getImage())
                 .synopsis(movie.getSynopsis())
                 .releaseDateOf(movie.getReleaseDateOf())
+                .genre(genres)
                 .professionalAssignments(new ArrayList<>(movie.getMovieSet()))
                 .genreLanguages(new ArrayList<>(movie.getLanguages()))
                 .build();
